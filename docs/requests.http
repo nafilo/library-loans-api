@@ -1,0 +1,53 @@
+@baseUrl = http://localhost:3000
+@loanId = 11111111-1111-4111-8111-111111111111
+
+### Informasi API
+GET {{baseUrl}}/
+
+### Daftar peminjaman
+GET {{baseUrl}}/loans
+
+### Filter
+GET {{baseUrl}}/loans?status=Terlambat&page=1&limit=20
+
+### Buat peminjaman, lalu ganti loanId di atas dengan data.id dari response
+POST {{baseUrl}}/loans
+Content-Type: application/json
+
+{
+  "member_code": "AGT-001",
+  "member_name": "Nadia Contoh",
+  "book_code": "BK-001",
+  "book_title": "Belajar REST API",
+  "loan_date": "2026-10-01",
+  "due_date": "2026-10-08"
+}
+
+### Detail
+GET {{baseUrl}}/loans/{{loanId}}
+
+### Ganti seluruh data
+PUT {{baseUrl}}/loans/{{loanId}}
+Content-Type: application/json
+
+{
+  "member_code": "AGT-001",
+  "member_name": "Nadia Contoh",
+  "book_code": "BK-001",
+  "book_title": "Belajar REST API",
+  "loan_date": "2026-10-01",
+  "due_date": "2026-10-10",
+  "status": "Terlambat"
+}
+
+### Kembalikan buku
+PATCH {{baseUrl}}/loans/{{loanId}}
+Content-Type: application/json
+
+{
+  "status": "Dikembalikan",
+  "return_date": "2026-10-06"
+}
+
+### Hapus peminjaman
+DELETE {{baseUrl}}/loans/{{loanId}}

@@ -1,0 +1,87 @@
+{
+  "info": {
+    "name": "Library Loans API - Responsi Modul 1",
+    "description": "Jalankan berurutan. Create menyimpan loanId otomatis. Semua data fiktif. Ganti baseUrl untuk menguji Vercel.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000", "type": "string" },
+    { "key": "loanId", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('HTTP 200', () => pm.response.to.have.status(200));"] } }]
+    },
+    {
+      "name": "Create loan",
+      "request": {
+        "method": "POST", "url": "{{baseUrl}}/loans",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"member_code\": \"AGT-TEST\",\n  \"member_name\": \"Nadia Contoh\",\n  \"book_code\": \"BK-TEST\",\n  \"book_title\": \"Belajar REST API\",\n  \"loan_date\": \"2026-10-01\",\n  \"due_date\": \"2026-10-08\"\n}", "options": { "raw": { "language": "json" } } }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+        "if (pm.response.code === 201) pm.collectionVariables.set('loanId', pm.response.json().data.id);"
+      ] } }]
+    },
+    {
+      "name": "List loans",
+      "request": { "method": "GET", "url": "{{baseUrl}}/loans?page=1&limit=20" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('HTTP 200', () => pm.response.to.have.status(200));"] } }]
+    },
+    {
+      "name": "Get loan detail",
+      "request": { "method": "GET", "url": "{{baseUrl}}/loans/{{loanId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('ID sesuai', () => pm.expect(pm.response.json().data.id).to.eql(pm.collectionVariables.get('loanId')));"
+      ] } }]
+    },
+    {
+      "name": "Replace loan - PUT",
+      "request": {
+        "method": "PUT", "url": "{{baseUrl}}/loans/{{loanId}}",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"member_code\": \"AGT-TEST\",\n  \"member_name\": \"Nadia Contoh\",\n  \"book_code\": \"BK-TEST\",\n  \"book_title\": \"Belajar REST API\",\n  \"loan_date\": \"2026-10-01\",\n  \"due_date\": \"2026-10-10\",\n  \"status\": \"Terlambat\"\n}", "options": { "raw": { "language": "json" } } }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('HTTP 200', () => pm.response.to.have.status(200));"] } }]
+    },
+    {
+      "name": "Filter status Terlambat",
+      "request": { "method": "GET", "url": "{{baseUrl}}/loans?status=Terlambat&member_code=AGT-TEST&book_code=BK-TEST" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('Semua hasil Terlambat', () => pm.response.json().data.forEach(row => pm.expect(row.status).to.eql('Terlambat')));"
+      ] } }]
+    },
+    {
+      "name": "Return book - PATCH",
+      "request": {
+        "method": "PATCH", "url": "{{baseUrl}}/loans/{{loanId}}",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"status\": \"Dikembalikan\",\n  \"return_date\": \"2026-10-06\"\n}", "options": { "raw": { "language": "json" } } }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('Buku dikembalikan', () => pm.expect(pm.response.json().data.status).to.eql('Dikembalikan'));"
+      ] } }]
+    },
+    {
+      "name": "Invalid status - expected 400",
+      "request": { "method": "GET", "url": "{{baseUrl}}/loans?status=Salah" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('HTTP 400', () => pm.response.to.have.status(400));"] } }]
+    },
+    {
+      "name": "Delete loan",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/loans/{{loanId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('HTTP 200', () => pm.response.to.have.status(200));"] } }]
+    },
+    {
+      "name": "Get deleted loan - expected 404",
+      "request": { "method": "GET", "url": "{{baseUrl}}/loans/{{loanId}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('HTTP 404', () => pm.response.to.have.status(404));"] } }]
+    }
+  ]
+}
