@@ -5,9 +5,9 @@ REST API untuk mencatat peminjaman buku oleh anggota perpustakaan. Proyek Respon
 | | Link |
 | --- | --- |
 | Repository | [github.com/nafilo/library-loans-api](https://github.com/nafilo/library-loans-api) |
-| API production | [library-loans-api-ebon.vercel.app](https://library-loans-api-ebon.vercel.app/) |
-| Endpoint daftar | [GET /loans](https://library-loans-api-ebon.vercel.app/loans) |
-| Contoh filter | [GET /loans?status=Terlambat](https://library-loans-api-ebon.vercel.app/loans?status=Terlambat) |
+| API production (branch `main`) | [library-loans-api-git-main-arkannurcahyo-8143s-projects.vercel.app](https://library-loans-api-git-main-arkannurcahyo-8143s-projects.vercel.app/) |
+| URL deployment ini | [library-loans-oq4bcqmvc-arkannurcahyo-8143s-projects.vercel.app](https://library-loans-oq4bcqmvc-arkannurcahyo-8143s-projects.vercel.app/) |
+| Contoh filter | [GET /loans?status=Terlambat](https://library-loans-api-git-main-arkannurcahyo-8143s-projects.vercel.app/loans?status=Terlambat) |
 
 ## Fitur
 

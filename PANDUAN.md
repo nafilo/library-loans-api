@@ -9,9 +9,10 @@ API menyediakan CRUD peminjaman, filter berdasarkan status/anggota/buku, dan pag
 | Output | Link |
 | --- | --- |
 | Repository GitHub publik | [github.com/nafilo/library-loans-api](https://github.com/nafilo/library-loans-api) |
-| Base URL Vercel | [library-loans-api-ebon.vercel.app](https://library-loans-api-ebon.vercel.app/) |
+| Base URL production (branch `main`) | [library-loans-api-git-main-arkannurcahyo-8143s-projects.vercel.app](https://library-loans-api-git-main-arkannurcahyo-8143s-projects.vercel.app/) |
+| URL deployment ini | [library-loans-oq4bcqmvc-arkannurcahyo-8143s-projects.vercel.app](https://library-loans-oq4bcqmvc-arkannurcahyo-8143s-projects.vercel.app/) |
 
-Endpoint production yang berhasil diuji melalui browser: [`/loans`](https://library-loans-api-ebon.vercel.app/loans) dan [`/loans?status=Terlambat`](https://library-loans-api-ebon.vercel.app/loans?status=Terlambat).
+Endpoint production: [`/loans`](https://library-loans-api-git-main-arkannurcahyo-8143s-projects.vercel.app/loans) dan [`/loans?status=Terlambat`](https://library-loans-api-git-main-arkannurcahyo-8143s-projects.vercel.app/loans?status=Terlambat). URL deployment khusus yang tampak pada dashboard Vercel juga dicantumkan di atas.
 
 ## Fitur dan batasan
 
