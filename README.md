@@ -164,4 +164,3 @@ Proyek Vercel memakai default export dari `src/app.js`. Tambahkan `SUPABASE_URL`
 - Jalankan `npm run test:live` saat API lokal berjalan untuk menguji CRUD dengan Supabase.
 - Untuk menguji deployment, isi `$env:BASE_URL = "https://URL-KAMU.vercel.app"`, jalankan `npm run test:live`, lalu hapus variabel dengan `Remove-Item Env:BASE_URL`.
 
-Panduan setup lengkap dari pembuatan Supabase, upload GitHub, hingga deployment Vercel tersedia di [`PANDUAN.md`](PANDUAN.md).
